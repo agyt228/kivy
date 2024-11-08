@@ -1,0 +1,20 @@
+<LoginScreen>:
+    GridLayout:
+        cols: 1
+        padding: 10
+        spacing: 10
+        Label:
+            text: "Login"
+            font_size: 132
+        TextInput:
+            id: username_input
+            hint_text: "Login"
+            multiline: False
+        TextInput:
+            id: password_input
+            hint_text: "Password"
+            password: True
+            multiline: False
+        Button:
+            text: "Авторизироваться"
+            on_press: root.validate_user()
