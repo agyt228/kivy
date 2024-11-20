@@ -45,13 +45,13 @@ class ChatListScreen(Screen):
         super(ChatListScreen, self).__init__(**kwargs)
 
         self.layout = BoxLayout(orientation='vertical')
-        self.header = Label(text="Список чатов", font_size='54px', size_hint=(1, 0.1))
+        self.header = Label(text="Список чатов", font_size='54sp', size_hint=(1, 0.1))
         self.layout.add_widget(self.header)
 
 
 
         self.create_chat_btn = Button(text='Создать чат', size_hint=(1, 0.1))
-        self.create_chat_btn.bind(on_press=self.create_chat)
+        self.create_chat_btn.bind(on_press=self.create_chat_1)
         self.layout.add_widget(self.create_chat_btn)
 
         self.scroll_view = ScrollView(size_hint=(1, 0.9))
@@ -62,27 +62,20 @@ class ChatListScreen(Screen):
 
         self.add_widget(self.layout)
 
-
-
-
     def set_chat_list(self, chats):
-        self.chat_list_layout.clear_widgets()
+        self.chat_list_layout.clear_widgets()  # Очищаем старый список
 
         for chat in chats:
-            grid_chats_list = GridLayout(cols=2) #сетка состоит из 2-х колонок
+            grid_chats_list = GridLayout(cols=2)
 
-            #1 добавляем аватарку
-            avatar = AsyncImage(source = f'{config.url_site}{chat['avatar']}', size_hint_x=None, width=200)
+            avatar = AsyncImage(source=f'{config.url_site}{chat['avatar']}', size_hint_x=None, width=200)
             grid_chats_list.add_widget(avatar)
 
-            #2 добавляем кнопку
-            btn = Button(text=chat['title'], size_hint = (0.4, 1), height=60)
+            btn = Button(text=chat['title'], height=40, size_hint=(0.4, 0.6))
             btn.bind(on_press=partial(self.open_chat, chat['id']))
             grid_chats_list.add_widget(btn)
 
-            #эту сетку добавляем в окно
             self.chat_list_layout.add_widget(grid_chats_list)
-    def create_chat(self, instance):
 
 
         box1 = BoxLayout(orientation='vertical')
